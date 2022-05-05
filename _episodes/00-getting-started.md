@@ -1,80 +1,75 @@
 ---
-title: "Introduction"
-teaching: 10
+title: "Introduction to OpenRefine"
+teaching: 15
 exercises: 0
 questions:
-- "What is OpenRefine useful for?"
+- "What is OpenRefine? What can it do?"
 objectives:
-- "Describe OpenRefine’s uses and applications."
-- "Differentiate data cleaning from data organization."
-- "Experiment with OpenRefine’s user interface."
-- "Locate helpful resources to learn more about OpenRefine."
+- "Explain what the OpenRefine software does"
+- "Explain how the OpenRefine software can help work with data files"
 keypoints:
-- "OpenRefine is a powerful, free and open source tool that can be used for data cleaning."
-- "OpenRefine will automatically track any steps you take in working with your data."
+- "OpenRefine is 'a tool for working with messy data'"
+- "OpenRefine works best with data in a simple tabular format"
+- "OpenRefine can help you split data up into more granular parts"
+- "OpenRefine can help you match local data up to other data sets"
+- "OpenRefine can help you enhance a data set with data from other sources"
 ---
 
 # Lesson
 
-## Motivations for the OpenRefine Lesson
+## What is OpenRefine?
 
+ OpenRefine is a desktop application that uses your web browser as a graphical interface. It is described as "a power tool for working with messy data" ([David Huynh](http://web.archive.org/web/20141021040915/http://davidhuynh.net/spaces/nicar2011/tutorial.pdf)) - but what does this mean? It is probably easiest to describe the kinds of data OpenRefine is good at working with and the sorts of problems it can help you or your team solve.
 
-- Data is often very messy, and this tool saves a lot of time on cleaning
-  headaches.
-- Data cleaning steps often need repeating with multiple files. It is important to know what you did to your data. This makes it easy for you to repeat these steps again with similarly structured data. OpenRefine is
-  perfect for speeding up repetitive tasks by replaying previous actions on
-  multiple datasets.
--  Additionally, journals, granting agencies, and other institutions are requiring documentation of the
-  steps you took when working with your data. With OpenRefine, you can capture
-  all actions applied to your raw data and share them with your publication as
-  supplemental material.
-- Any operation that changes the data in OpenRefine can be easily reversed or
-  undone.
-- Some concepts such as clustering algorithms are quite complex, but OpenRefine
-  makes it easy to introduce them, use them, and show their power.
+OpenRefine is most useful where you have data in a simple tabular format such as a spreadsheet, a comma separated values file (csv) or a tab delimited file (tsv) but with internal inconsistencies either in data formats, or where data appears, or in terminology used. OpenRefine can be used to standardize and clean data across your file. It can help you:
 
-  >**Note:** You must export your modified dataset to a new file: OpenRefine does **not**
-  write back into your original sources. If you don't save it, your OpenRefine
-  work will be lost.
+* Get an overview of a data set
+* Resolve inconsistencies in a data set, for example standardizing date formatting
+* Help you split data up into more granular parts, for example splitting up cells with multiple authors into separate cells
+* Match local data up to other data sets - for example, in matching forms of personal names against name authority records in the Virtual International Authority File (VIAF)
+* Enhance a data set with data from other sources
 
-## Before we get started
+Some common scenarios might be:
 
+* Where you want to know how many times a particular value (name, publisher, subject) appears in a column in your data
+* Where you want to know how values are distributed across your whole data set
+* Where you have a list of dates which are formatted in different ways, and want to change all the dates in the list to a single common date format. For example:
 
-The following setup is necessary before we can get started (see the [instructions here](../setup.html).)
+| Data you have   | Desired data |
+|-----------------|:-------------|
+| 1st January 2014| 2014-01-01   |
+| 01/01/2014      | 2014-01-01   |
+| Jan 1 2014      | 2014-01-01   |
+| 2014-01-01      | 2014-01-01   |
 
-Do you need help with any of the following?
+* Where you have a list of names or terms that differ from each other but refer to the same people, places or concepts. For example:
 
-- Download and install OpenRefine 3.5.2 from <https://openrefine.org/download.html>
-- Download this [data file](https://ndownloader.figshare.com/files/7823341) and save to your desktop
-- If after installation and running OpenRefine, it does not automatically open for you, point your browser at <http://127.0.0.1:3333/> or <http://localhost:3333/> to launch the program.
+| Data you have   | Desired data |
+|-----------------|:-------------|
+| London          | London       |
+| London]         | London       |
+| London,]        | London       |
+| london          | London       |
 
+* Where you have several bits of data combined together in a single column, and you want to separate them out into individual bits of data with one column for each bit of the data. For example going from a single address field (in the first column), to each part of the address in a separate field:
 
-What is OpenRefine?
+| Address in single field | Institution  | Library name  | Address 1 | Address 2 | Town/City | Region | Country | Postcode |
+|-------------------------|:-------------|:-------------|:-------------|:-------------|:-------------|:-------------|:-------------|:-------------|
+| University of Wales, Llyfrgell Thomas Parry Library, Llanbadarn Fawr, ABERYSTWYTH, Ceredigion, SY23 3AS, United Kingdom | University of Wales | Llyfrgell Thomas Parry Library | Llanbadarn Fawr | | Aberystwyth | Ceredigion | United Kingdom | SY23 3AS |
+| University of Aberdeen, Queen Mother Library, Meston Walk, ABERDEEN, AB24 3UE, United Kingdom | University of Abderdeen | Queen Mother Library | Meston Walk | | Aberdeen | | United Kingdom | AB24 3UE |
+| University of Birmingham, Barnes Library, Medical School, Edgbaston, BIRMINGHAM, West Midlands, B15 2TT, United Kingdom | University of Birmingham | Barnes Library | Medical School | Edgbaston | Birmingham | West Midlands | United Kingdom | B15 2TT |
+| University of Warwick, Library, Gibbett Hill Road, COVENTRY, CV4 7AL, United Kingdom | University of Warwick | Library | Gibbett Hill Road | | Coventry | | United Kingdom | CV4 7AL |
 
- - OpenRefine is a Java program that runs on your machine (not in the cloud): it is a desktop application that uses your web browser as a graphical interface. No internet connection is needed, and none of the data or commands you enter in OpenRefine are sent to a remote server.
- - OpenRefine does not modify your original dataset. All actions are easily reversed in OpenRefine and you can capture all the actions applied to your data and share this documentation with your publication as supplemental material.
- - OpenRefine saves as you go. You can return to the project at any time to pick up where you left off or export your data to a new file.
- - OpenRefine can be used to standardise and clean data across your file.
+* Where you want to add to your data from an external data source:
 
+| Data you have   | Date of Birth from VIAF (Virtual International Authority File) | Date of Death from VIAF (Virtual International Authority File) |
+|-----------------|:-------------|:-------------|
+| Braddon, M. E. (Mary Elizabeth) | 1835 | 1915 |
+| Rossetti, William Michael       | 1829 | 1919 |
+| Prest, Thomas Peckett           | 1810 | 1879 |
 
-It can also help you
-
-- Get an overview of a data set
-- Resolve inconsistencies in a data set
-- Help you split data up into more granular parts
-- Match local data up to other data sets
-- Enhance a data set with data from other sources
-- Save a set of data cleaning steps to replay on multiple files
-
-
-OpenRefine is a powerful, free, and open source tool with a large growing community of practice. More help can be found at <https://openrefine.org>.
-
-
-## More Information on OpenRefine
-
-You can find out a lot more about OpenRefine at the official user manual [docs.openrefine.org](https://docs.openrefine.org/). There is a [Google Group](https://groups.google.com/g/openrefine) that can answer a lot of beginner questions and problems. [Recipes](https://github.com/OpenRefine/OpenRefine/wiki/Recipes), scripts, projects, and extensions are available to add functionality to OpenRefine. These can be copied into your OpenRefine instance to run on your dataset.
-
-## Features
-
-* Open source ([source on GitHub](https://github.com/OpenRefine/OpenRefine)).
-* A large growing community, from novice to expert, ready to help.
+## What Should I Know When Working With OpenRefine?
+* No internet connection is needed, and none of the data or commands you enter in OpenRefine are sent to a remote server.
+* You are NOT modifying original/raw data.
+* Projects are autosaved every five minutes and when OpenRefine is properly shut down (Ctrl+C). See [History in User Manual](https://docs.openrefine.org/manual/running/#history-undoredo) for details.
+* Files are saved locally such that if you are working on two computers you will have to export/import files/projects.
