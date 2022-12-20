@@ -95,7 +95,7 @@ misspelled and mistyped entries in a later exercise.
 > * Custom facets
 > * Scatterplot facets
 >
-> **Numeric and Scatterplot facets** display graphs instead of lists of values. The numeric facet graph includes 'drag and drop' controls you can use to set a start and end range to filter the data displayed. These facets are explored further in [Examining Numbers in OpenRefine](http://www.datacarpentry.org/OpenRefine-ecology-lesson/03-numbers/)
+> **Numeric and Scatterplot facets** display graphs instead of lists of values. The numeric facet graph includes 'drag and drop' controls you can use to set a start and end range to filter the data displayed. These facets are explored further in [Examining Numbers in OpenRefine](https://datacarpentry.org/OpenRefine-ecology-lesson/03-transforming-data/index.html)
 >
 > **Custom facets** are a range of different types of facets. Some of the default custom facets are:
 >
